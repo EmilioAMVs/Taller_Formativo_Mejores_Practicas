@@ -1,120 +1,70 @@
-# Taller-Formativo
+# Taller Formativo: Implementación de Patrones de Diseño en Aplicativos de Automóviles
 
-Overview
+## Descripción General
 
-This project is a vehicle management system that incorporates both the Builder and Singleton design patterns to manage and create vehicle instances effectively. The system is designed to be flexible, maintainable, and scalable, catering to requirements for unique vehicle instances and complex object construction.
+Este proyecto consiste en implementar patrones de diseño, principios SOLID y mejores prácticas en un aplicativo de gestión de vehículos para cumplir con los requerimientos establecidos por Codificando Con Patrones Cía. Ltda. 
 
-Features
+El proyecto incluye la implementación de:
+- Métodos de agregar vehículos.
+- Un mecanismo para probar funcionalidades sin depender de la base de datos.
+- Propiedades por defecto para vehículos, minimizando el impacto en futuros cambios.
+- Un Factory Method para soportar la creación dinámica de nuevos modelos de vehículos.
 
-Singleton Pattern:
+## Requerimientos del Proyecto
 
-Ensures that specific vehicle models (e.g., Ford Escape) have a single shared instance throughout the application.
+### Problemas Identificados
+1. **Métodos de agregar vehículos:** 
+   - Los métodos de agregar vehículos en el Home Page no están implementados correctamente y no funcionan como se espera.
+   - El patrón repositorio existente requiere modificaciones.
 
-Guarantees consistency and prevents duplicate instances.
+2. **Ausencia de base de datos:** 
+   - El esquema de la base de datos no está listo, lo que exige una solución temporal para probar la funcionalidad sin almacenamiento persistente.
 
-Builder Pattern:
+3. **Propiedades por defecto:** 
+   - Se necesita agregar 20 propiedades por defecto al modelo de vehículo, además del año actual. La solución debe permitir extensibilidad para futuros sprints.
 
-Facilitates step-by-step construction of complex vehicle objects.
+4. **Introducción de nuevos modelos:**
+   - La adición de un nuevo modelo (Escape, marca Ford, color rojo) requiere implementar un Factory Method, anticipando futuras solicitudes de nuevos modelos.
 
-Enables easy configuration and extension for additional vehicle attributes.
+### Solución Propuesta
+Para abordar los problemas, se implementaron los siguientes patrones de diseño y principios:
 
-Project Structure
+#### Patrón Singleton
+- **Propósito:** Permitir el acceso único y global a un repositorio temporal para gestionar vehículos mientras la base de datos no está lista.
+- **Implementación:** Clase `MyVehiclesRepository` dentro de la carpeta `Repositories`.
 
-project/
-├── src/
-│   ├── singleton_vehicle.py       # Implementation of the Singleton pattern for unique vehicles
-│   ├── vehicle_builder.py        # Implementation of the Builder pattern for flexible vehicle construction
-│   ├── home_page.py              # Main client class integrating both patterns
-│   └── vehicle.py                # Vehicle class representing the final product
-├── tests/
-│   ├── test_singleton.py         # Unit tests for Singleton implementation
-│   ├── test_builder.py           # Unit tests for Builder implementation
-│   └── test_integration.py       # Integration tests for combined functionality
-├── README.md                     # Project documentation
-└── requirements.txt              # Dependencies
+#### Patrón Builder
+- **Propósito:** Facilitar la construcción de vehículos con propiedades por defecto, incluyendo el año actual.
+- **Implementación:** Clase `CarModelBuilder` en la carpeta `ModelBuilder`.
 
-Design Patterns Used
+#### Patrón Factory Method
+- **Propósito:** Estandarizar la creación de nuevos modelos de vehículos.
+- **Implementación:** Clases como `FordEscapeFactory`, `FordExplorerFactory` y `FordMustangFactory` en la carpeta `Factories`.
 
-Singleton Pattern
 
-Purpose: Ensure a single shared instance of a specific vehicle model.
+## Justificación de los Patrones
+1. Builder: Permite agregar propiedades de forma extensible, simplificando cambios futuros.
+2. Factory Method: Estandariza la creación de nuevos modelos, facilitando la incorporación de futuras extensiones.
+3. Singleton: Resuelve la falta de base de datos proporcionando una solución temporal sin duplicación de instancias.
 
-Implementation:
 
-SingletonVehicle class uses a private static attribute _instance to store the single instance.
+## Cómo Ejecutar el Proyecto
 
-Clients use the set_vehicle method to configure and retrieve the instance.
+1. **Clonar el Repositorio:**
+   ```bash
+   git clone https://github.com/EmilioAMVs/Taller_Formativo_Mejores_Practicas.git
+   cd Best-Practices-Udla-Workshop
+  
+2. **Instalar Dependencias**
+   ```bash
+   dotnet restore
+   ```
+3. **Ejecutar la Aplicacion**
+    ```bash
+    dotnet run
+    ```
+4. **Pruebas Unitarias**
+   ```bash
+   dotnet test
+   ```
 
-Builder Pattern
-
-Purpose: Construct complex Vehicle objects step-by-step, allowing customization and easy extension.
-
-Implementation:
-
-VehicleBuilder provides methods like set_model, set_color, and set_property to configure the vehicle.
-
-The build method returns a fully constructed Vehicle instance.
-
-How to Run the Project
-
-Clone the Repository:
-
-git clone https://github.com/yourusername/vehicle-management-system.git
-cd vehicle-management-system
-
-Install Dependencies:
-
-pip install -r requirements.txt
-
-Run the Application:
-
-python src/home_page.py
-
-Run Tests:
-
-pytest tests/
-
-Example Usage
-
-Singleton Example
-
-from singleton_vehicle import SingletonVehicle
-
-# Create a unique instance of Ford Escape
-singleton = SingletonVehicle()
-escape = singleton.set_vehicle(model="Escape", color="Red", brand="Ford")
-print(escape)  # Output: {'model': 'Escape', 'color': 'Red', 'brand': 'Ford'}
-
-Builder Example
-
-from vehicle_builder import VehicleBuilder
-
-# Construct a vehicle using the Builder
-builder = VehicleBuilder()
-vehicle = (builder.set_model("Mustang")
-                .set_color("Blue")
-                .set_brand("Ford")
-                .set_year(2025)
-                .set_property("horsepower", 450)
-                .build())
-print(vehicle)  # Output: {'model': 'Mustang', 'color': 'Blue', 'brand': 'Ford', ...}
-
-Future Enhancements
-
-Extend the Builder pattern to support additional vehicle types (e.g., electric, hybrid).
-
-Incorporate a Factory Method for dynamic vehicle model creation.
-
-Add a database integration to persist vehicle data.
-
-Contributing
-
-Fork the repository.
-
-Create a new branch for your feature (git checkout -b feature-name).
-
-Commit your changes (git commit -m 'Add new feature').
-
-Push to the branch (git push origin feature-name).
-
-Open a Pull Request.
