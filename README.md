@@ -1,5 +1,8 @@
 # Taller Formativo: Implementación de Patrones de Diseño en Aplicativos de Automóviles
 
+### Video de explicacion
+[Taller Formativo Mejores Practicas.mp4](https://udlaec-my.sharepoint.com/:v:/g/personal/ariel_cabrera_udla_edu_ec/ESRW2_oFYqdKmaazHOClB5QBrQ_cv42aDANskm3M0YEnQw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=OeZYeM)
+
 ## Descripción General
 
 Este proyecto consiste en implementar patrones de diseño, principios SOLID y mejores prácticas en un aplicativo de gestión de vehículos para cumplir con los requerimientos establecidos por Codificando Con Patrones Cía. Ltda. 
